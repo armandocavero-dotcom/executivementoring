@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Development · Top Search Perú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --navy:#0B1B3B; --cloud:#F5F7FA; --gold:#C9A25F; --muted:#A9B6C8; --dim:#4A5A72; --line:rgba(201,162,95,0.18); }
+        *,*::before,*::after{box-sizing:border-box}
+        body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cloud);overflow-x:hidden;margin:0}
+        h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif}
+        .nav-fixed{position:fixed;top:0;left:0;width:100%;z-index:200;height:72px;display:flex;justify-content:space-between;align-items:center;padding:0 4vw;background:rgba(11,27,59,0.97);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+        .brand-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--cloud);letter-spacing:.03em;line-height:1.15;cursor:pointer;transition:color .3s}
+        .brand-name:hover{color:var(--gold)}
+        .brand-sub{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:400;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;display:block}
+        .nav-link{color:var(--muted);font-size:.82rem;font-weight:500;cursor:pointer;transition:color .25s;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:3px;height:72px;padding:0 .85rem;background:none;border:none;font-family:'DM Sans',sans-serif}
+        .nav-link:hover,.nav-link.active{color:var(--gold)}
+        .nav-item{position:relative;height:100%;display:flex;align-items:center}
+        .dropdown-menu{position:absolute;top:72px;left:50%;transform:translateX(-50%);background:#0d2147;border:1px solid var(--line);border-top:2px solid var(--gold);min-width:260px;display:none;box-shadow:0 16px 48px rgba(0,0,0,.6);z-index:300}
+        .nav-item:hover .dropdown-menu{display:block}
+        .dropdown-item{display:block;width:100%;padding:.9rem 1.4rem;color:var(--muted);font-size:.82rem;font-weight:500;text-align:left;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;letter-spacing:.03em}
+        .dropdown-item:hover{background:rgba(201,162,95,.08);color:var(--gold);padding-left:1.8rem}
+        .dropdown-label{display:block;padding:.5rem 1.4rem .3rem;font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.7;border-bottom:1px solid var(--line);font-family:'DM Mono',monospace}
+        .page-section{display:none;min-height:100vh;padding-top:72px;}
+        .page-section.active{display:block}
+        @keyframes fadeUp{from{opacity:1}to{opacity:1}}
+        .reveal{opacity:1;transform:none;}
+        .gold-btn{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:'DM Sans',sans-serif;font-weight:500;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;overflow:hidden;transition:color .3s;text-decoration:none}
+        .gold-btn::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateX(-102%);transition:transform .3s ease;z-index:-1}
+        .gold-btn:hover{color:var(--navy)}
+        .gold-btn:hover::before{transform:translateX(0)}
+        .feature-card{background:rgba(255,255,255,.025);border:1px solid var(--line);padding:2rem;transition:border-color .3s,transform .3s}
+        .feature-card:hover{border-color:rgba(201,162,95,.45);transform:translateY(-4px)}
+        .service-card{position:relative;background:rgba(255,255,255,.025);border:1px solid var(--line);padding:2.5rem;transition:all .35s}
+        .service-card:hover{border-color:var(--gold);background:rgba(201,162,95,.04);cursor:pointer}
+        .service-card .tag{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem}
+        .gold-line{width:48px;height:2px;background:var(--gold);margin:1.5rem 0}
+        .gold-line.center{margin:1.5rem auto}
+        .back-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);font-size:.8rem;font-weight:500;margin-bottom:2.5rem;cursor:pointer;opacity:.75;transition:opacity .2s;letter-spacing:.06em;text-transform:uppercase;background:none;border:none;font-family:'DM Sans',sans-serif}
+        .back-link:hover{opacity:1}
+        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 65% 25%,#162d58 0%,#0B1B3B 68%)}
+        .corner-frame{position:absolute;pointer-events:none;border-top:6px solid var(--gold);border-right:6px solid var(--gold)}
+        .stars-badge{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(201,162,95,.12);border:1px solid rgba(201,162,95,.35);font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;color:var(--gold);flex-shrink:0}
+        .timeline-item{display:flex;gap:1.5rem;padding-bottom:2rem;position:relative}
+        .timeline-item::before{content:'';position:absolute;left:1.125rem;top:2.5rem;bottom:0;width:1px;background:var(--line)}
+        .timeline-item:last-child::before{display:none}
+        .timeline-num{flex-shrink:0;width:2.25rem;height:2.25rem;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.75rem;color:var(--gold)}
+        .site-footer{padding:2rem 4vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+        .context-img{width:100%;height:300px;object-fit:cover;border-radius:2px;border:1px solid var(--line)}
+        .mentor-photo{object-fit:cover;object-position:center top;border-radius:2px;flex-shrink:0}
+        .contact-photo{width:3rem;height:3rem;object-fit:cover;object-position:center top;border-radius:2px}
+        .mono{font-family:'DM Mono',monospace}
+
+        /* SPLASH - pure CSS animation, no JS needed */
+        #splash {
+            position:fixed; inset:0; z-index:9999;
+            background:#0B1B3B;
+            display:flex; align-items:center; justify-content:center;
+            animation: splashFade 4.2s ease forwards;
+        }
+        @keyframes splashFade {
+            0%   { opacity:1; pointer-events:all; }
+            60%  { opacity:1; pointer-events:all; }
+            92%  { opacity:0; pointer-events:none; }
+            100% { opacity:0; pointer-events:none; display:none; }
+        }
+        #splash img {
+            width: min(500px, 78vw);
+            border-radius: 10px;
+            animation: splashPop .9s cubic-bezier(.22,1,.36,1) both;
+        }
+        @keyframes splashPop {
+            from { opacity:0; transform:scale(.82); }
+            to   { opacity:1; transform:scale(1); }
+        }
+
+        /* GLOBAL FONT SIZE BOOST - all body content at least 1rem */
+        p, li, span:not(.mono):not(.tag):not(.brand-sub):not(.brand-name), 
+        .feature-card p, .feature-card li, .feature-card span,
+        .timeline-item p, .dropdown-item,
+        a.flex { font-size: 1rem !important; line-height: 1.7 !important; }
+        
+        h4, .feature-card h4 { font-size: 1.1rem !important; }
+        
+        /* Keep nav/mono/label elements small */
+        .nav-link, .mono, .tag, .brand-sub, .dropdown-label,
+        .stars-badge, .back-link { font-size: inherit !important; line-height: inherit !important; }
+    </style>
+</head>
+<body>
+
+<div id="splash"><img src="logo.jpg" alt="Executive Mentoring"></div>
+
+<nav class="nav-fixed">
+    <div onclick="navigateTo('home')" style="cursor:pointer;display:flex;align-items:center;gap:.75rem">
+        <img src="logo.jpg" alt="Executive Mentoring" style="height:2.6rem;width:auto;border-radius:3px;">
+        <span class="brand-name">Executive Development<span class="brand-sub">Top Search Perú · InterSearch Worldwide</span></span>
+    </div>
+    <div class="hidden md:flex items-center h-full">
+        <div class="nav-item"><button onclick="navigateTo('home')" class="nav-link active" id="link-home">Inicio</button></div>
+        <div class="nav-item group">
+            <button class="nav-link" id="link-servicios">Servicios <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+            <div class="dropdown-menu">
+                <span class="dropdown-label">Nuestros programas</span>
+                <button onclick="navigateTo('em-overview')" class="dropdown-item"><span style="color:var(--gold);margin-right:.4rem">◆</span>Executive Mentoring &copy;</button>
+                <button onclick="navigateTo('sl-overview')" class="dropdown-item"><span style="color:var(--gold);margin-right:.4rem">◆</span>Soft Landing &copy;</button>
+            </div>
+        </div>
+        <div class="nav-item group">
+            <button class="nav-link" id="link-diferencia">Nuestra Diferencia <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i></button>
+            <div class="dropdown-menu">
+                <button onclick="navigateTo('diferencia-comparativo')" class="dropdown-item">Mentoring vs Coaching</button>
+                <button onclick="navigateTo('diferencia-mentor')" class="dropdown-item">Los Mentores</button>
+            </div>
+        </div>
+        <div class="nav-item"><button onclick="navigateTo('resultados')" class="nav-link" id="link-resultados">Resultados</button></div>
+        <div class="nav-item"><button onclick="navigateTo('contacto')" class="nav-link" id="link-contacto" style="color:var(--gold)">Contacto</button></div>
+    </div>
+    <button class="md:hidden text-[#F5F7FA]" onclick="toggleMobileMenu()"><i data-lucide="menu" class="w-6 h-6"></i></button>
+</nav>
+
+<div id="mobile-menu" class="fixed top-[72px] left-0 w-full bg-[#0B1B3B]/97 border-t border-[#C9A25F]/15 h-[calc(100vh-72px)] overflow-y-auto hidden z-50">
+    <div class="flex flex-col p-6 gap-5">
+        <button onclick="navigateTo('home');toggleMobileMenu()" class="text-left text-base text-[#F5F7FA] font-medium uppercase tracking-wider">Inicio</button>
+        <div class="mono text-xs text-[#C9A25F] uppercase tracking-[.18em] font-semibold mt-2">Servicios</div>
+        <button onclick="navigateTo('em-overview');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Executive Mentoring &copy;</button>
+        <button onclick="navigateTo('sl-overview');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Soft Landing &copy;</button>
+        <div class="mono text-xs text-[#C9A25F] uppercase tracking-[.18em] font-semibold mt-2">Nuestra Diferencia</div>
+        <button onclick="navigateTo('diferencia-comparativo');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Mentoring vs Coaching</button>
+        <button onclick="navigateTo('diferencia-mentor');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Los Mentores</button>
+        <button onclick="navigateTo('resultados');toggleMobileMenu()" class="text-left text-base text-[#F5F7FA] font-medium uppercase tracking-wider">Resultados</button>
+        <button onclick="navigateTo('contacto');toggleMobileMenu()" class="text-left text-base text-[#C9A25F] font-medium uppercase tracking-wider">Contacto</button>
+    </div>
+</div>
+
+<!-- HOME -->
+<section id="home" class="page-section active relative">
+    <div class="hero-bg"></div>
+    <div class="corner-frame" style="right:6vw;top:13vh;width:22vw;height:22vh"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center px-[6vw] text-center" style="min-height:88vh;padding-bottom:6rem">
+        <div class="reveal mb-8 inline-block"><img src="logo.jpg" alt="Executive Mentoring" style="height:9rem;width:auto"></div>
+        <div class="reveal"><span class="mono" style="font-size:.68rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase">Executive Development · Top Search Perú</span></div>
+        <h1 class="reveal text-[#F5F7FA] mt-5 mb-6" style="font-size:clamp(2.8rem,6.5vw,5rem);font-weight:600;line-height:.95;max-width:820px">La experiencia no se enseña,<br><em style="color:var(--gold);font-style:italic">se comparte.</em></h1>
+        <p class="reveal text-[#A9B6C8] text-lg mb-10 leading-relaxed" style="max-width:580px">Dos programas de mentoría ejecutiva diseñados para acelerar el liderazgo de alto nivel y reducir el riesgo de las transiciones críticas.</p>
+        <div class="reveal grid md:grid-cols-2 gap-6 mb-10 w-full" style="max-width:1100px">
+            <div class="service-card text-left" onclick="navigateTo('em-overview')">
+                <span class="tag" style="font-size:.85rem;letter-spacing:.18em">PROGRAMA <span style="font-size:1.5rem;font-weight:700;vertical-align:middle">01</span></span>
+                <h3 class="text-[#F5F7FA] mb-3" style="font-size:1.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.05">Executive Mentoring &copy;</h3>
+                <p class="text-[#A9B6C8] leading-relaxed mb-5" style="font-size:1rem">Transferencia de criterio ejecutivo en 14 sesiones para líderes de alta dirección.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="color:var(--gold);font-size:.9rem;font-weight:500">Conocer más →</span>
+                    <span style="color:var(--muted);font-size:.85rem;opacity:.8">&copy; Executive Mentoring</span>
+                </div>
+            </div>
+            <div class="service-card text-left" onclick="navigateTo('sl-overview')">
+                <span class="tag" style="font-size:.85rem;letter-spacing:.18em">PROGRAMA <span style="font-size:1.5rem;font-weight:700;vertical-align:middle">02</span></span>
+                <h3 class="text-[#F5F7FA] mb-3" style="font-size:1.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.05">Soft Landing &copy;</h3>
+                <p class="text-[#A9B6C8] leading-relaxed mb-5" style="font-size:1rem">Acompañamiento intensivo en los primeros 90 días de un nuevo rol ejecutivo.</p>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="color:var(--gold);font-size:.9rem;font-weight:500">Conocer más →</span>
+                    <span style="color:var(--muted);font-size:.85rem;opacity:.8">&copy; Soft Landing</span>
+                </div>
+            </div>
+        </div>
+        <div class="reveal"><button onclick="navigateTo('contacto')" class="gold-btn"><span>Conversemos</span><i data-lucide="arrow-right" class="w-4 h-4"></i></button></div>
+    </div>
+</section>
+
+<!-- EXECUTIVE MENTORING -->
+<section id="em-overview" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="reveal mb-2"><span class="mono" style="font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase">Programa 01</span></div>
+        <h2 class="reveal text-[#F5F7FA] mb-3" style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:600;line-height:1">Executive Mentoring &copy;</h2>
+        <div class="gold-line reveal"></div>
+        <div class="reveal mb-10"><img src="mentoring.jpg" alt="Sesión de mentoría ejecutiva" class="context-img" style="object-position:center 25%"></div>
+        <p class="reveal text-[#A9B6C8] text-lg leading-relaxed mb-14" style="max-width:680px">Un programa de 14 sesiones diseñado para transformar la capacidad de decisión estratégica y el criterio ejecutivo de los líderes más importantes de su organización.</p>
+        <div class="reveal mb-16">
+            <h3 class="text-[#F5F7FA] mb-8" style="font-size:1.6rem;font-weight:600">¿Qué lo hace diferente?</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="feature-card"><i data-lucide="user-check" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h4 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Mentoría, no Coaching</h4><p class="text-[#A9B6C8] text-base leading-relaxed">El Mentor habla desde lo vivido. Comparte criterio ejecutivo real adquirido como CEO y VP en empresas Fortune 500.</p></div>
+                <div class="feature-card"><i data-lucide="briefcase" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h4 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Casos Reales</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Cada sesión se centra en un reto real y activo del Mentee. No hay casos de libro: cada encuentro es una consulta de alto nivel.</p></div>
+                <div class="feature-card"><i data-lucide="shield" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h4 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Exclusivo y Confidencial</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Máximo 4 mentees por mentor. El Mentor firma NDA. Confidencialidad absoluta garantizada.</p></div>
+            </div>
+        </div>
+        <div class="reveal mb-16">
+            <h3 class="text-[#F5F7FA] mb-2" style="font-size:1.6rem;font-weight:600">Estructura del Programa</h3>
+            <p class="text-[#A9B6C8] text-sm mb-8">14 sesiones · ~90 minutos c/u · Tres fases</p>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="feature-card" style="border-color:rgba(201,162,95,.3)"><div class="mono" style="font-size:.62rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem">Fase 1 · Sesiones 1–3</div><h4 class="text-[#F5F7FA] font-semibold mb-3">Diagnóstico y Alineación</h4><ul class="space-y-2 text-[#A9B6C8] text-base"><li class="flex gap-2"><span style="color:var(--gold)">·</span>Alineación con el Sponsor</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Conocer al ejecutivo y evaluar competencias</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Análisis PDA Assessment</li></ul></div>
+                <div class="feature-card" style="border-color:rgba(201,162,95,.5);background:rgba(201,162,95,.04)"><div class="mono" style="font-size:.62rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem">Fase 2 · Sesiones 4–11</div><h4 class="text-[#F5F7FA] font-semibold mb-3">Transferencia de Criterio</h4><ul class="space-y-2 text-[#A9B6C8] text-base"><li class="flex gap-2"><span style="color:var(--gold)">·</span>Criterio de liderazgo</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Decisiones estratégicas</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Comunicación ejecutiva</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Influencia y cultura</li></ul></div>
+                <div class="feature-card" style="border-color:rgba(201,162,95,.3)"><div class="mono" style="font-size:.62rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem">Fase 3 · Sesiones 12–14</div><h4 class="text-[#F5F7FA] font-semibold mb-3">Cierre y Reporte</h4><ul class="space-y-2 text-[#A9B6C8] text-base"><li class="flex gap-2"><span style="color:var(--gold)">·</span>Revisión de avances</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Cierre con el Mentee</li><li class="flex gap-2"><span style="color:var(--gold)">·</span>Resumen Ejecutivo al Sponsor</li></ul></div>
+            </div>
+        </div>
+        <div class="reveal text-center"><button onclick="navigateTo('contacto')" class="gold-btn"><i data-lucide="calendar" class="w-4 h-4"></i><span>Solicitar información</span><i data-lucide="arrow-right" class="w-4 h-4"></i></button></div>
+    </div>
+</section>
+
+<!-- SOFT LANDING -->
+<section id="sl-overview" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="reveal mb-2"><span class="mono" style="font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase">Programa 02</span></div>
+        <h2 class="reveal text-[#F5F7FA] mb-3" style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:600;line-height:1">Soft Landing &copy;</h2>
+        <div class="gold-line reveal"></div>
+        <div class="reveal mb-10"><img src="meeting.jpg" alt="Transición ejecutiva" class="context-img" style="object-position:center 30%"></div>
+        <p class="reveal text-[#A9B6C8] text-lg leading-relaxed mb-5" style="max-width:680px">Los primeros 90 días son el período más frágil de cualquier transición ejecutiva. El 40% de los ejecutivos en transición no alcanza sus objetivos en los primeros 18 meses. La causa principal no es falta de talento: es la ausencia de un marco deliberado para navegar el contexto y construir credibilidad desde el día uno.</p>
+        <p class="reveal text-[#A9B6C8] text-base leading-relaxed mb-12" style="max-width:680px">Basado en la metodología de <em>Michael D. Watkins — The First 90 Days</em> (HBR Press), el programa Soft Landing&copy; acompaña al ejecutivo en 4 sesiones intensivas para que aterrice con claridad, velocidad y autoridad en su nuevo rol.</p>
+        <div class="reveal grid md:grid-cols-3 gap-6 mb-16 p-8 bg-[#ffffff04] border border-[#C9A25F]/12">
+            <div class="text-center"><div class="text-[#C9A25F] mb-1" style="font-size:2.8rem;font-weight:700;font-family:'Cormorant Garamond',serif">40%</div><p class="text-[#F5F7FA] text-sm font-medium mb-1">no alcanza sus objetivos</p><p class="text-[#A9B6C8] text-sm italic">primeros 18 meses · HBR</p></div>
+            <div class="text-center" style="border-left:1px solid rgba(201,162,95,.15);border-right:1px solid rgba(201,162,95,.15)"><div class="text-[#C9A25F] mb-1" style="font-size:2.8rem;font-weight:700;font-family:'Cormorant Garamond',serif">2.5×</div><p class="text-[#F5F7FA] text-sm font-medium mb-1">integración más rápida</p><p class="text-[#A9B6C8] text-sm italic">con mentoría estructurada · McKinsey</p></div>
+            <div class="text-center"><div class="text-[#C9A25F] mb-1" style="font-size:2.8rem;font-weight:700;font-family:'Cormorant Garamond',serif">60%</div><p class="text-[#F5F7FA] text-sm font-medium mb-1">menos tiempo</p><p class="text-[#A9B6C8] text-sm italic">para plena contribución · Watkins</p></div>
+        </div>
+        <div class="reveal mb-16">
+            <h3 class="text-[#F5F7FA] mb-2" style="font-size:1.6rem;font-weight:600">El Modelo STARS</h3>
+            <p class="text-[#A9B6C8] text-sm mb-8">Todo líder en transición hereda una situación. Antes de actuar, hay que diagnosticarla.</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="feature-card text-center p-4"><div class="stars-badge mx-auto mb-3">S</div><div class="text-[#F5F7FA] text-sm font-semibold mb-1">Start-up</div><div class="text-[#A9B6C8] text-base">Construir desde cero</div></div>
+                <div class="feature-card text-center p-4"><div class="stars-badge mx-auto mb-3">T</div><div class="text-[#F5F7FA] text-sm font-semibold mb-1">Turnaround</div><div class="text-[#A9B6C8] text-base">Crisis visible</div></div>
+                <div class="feature-card text-center p-4"><div class="stars-badge mx-auto mb-3">A</div><div class="text-[#F5F7FA] text-sm font-semibold mb-1">Acc. Growth</div><div class="text-[#A9B6C8] text-base">Éxito bajo tensión</div></div>
+                <div class="feature-card text-center p-4"><div class="stars-badge mx-auto mb-3">R</div><div class="text-[#F5F7FA] text-sm font-semibold mb-1">Realignment</div><div class="text-[#A9B6C8] text-base">Deriva silenciosa</div></div>
+                <div class="feature-card text-center p-4 col-span-2 md:col-span-1"><div class="stars-badge mx-auto mb-3">SS</div><div class="text-[#F5F7FA] text-sm font-semibold mb-1">Sust. Success</div><div class="text-[#A9B6C8] text-base">Todo va bien</div></div>
+            </div>
+        </div>
+        <div class="reveal mb-16">
+            <h3 class="text-[#F5F7FA] mb-2" style="font-size:1.6rem;font-weight:600">Las 4 Sesiones</h3>
+            <p class="text-[#A9B6C8] text-sm mb-8">Sesión 1: 2.5 horas (incluye reunión previa con el supervisor) · Sesiones 2–4: 2 horas c/u</p>
+            <div class="space-y-4">
+                <div class="timeline-item"><div class="timeline-num">1</div><div class="pt-0.5"><div class="mono" style="font-size:.62rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem">Semanas 1–2 · 2.5 horas</div><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">Alineación con el supervisor + Diagnóstico y arranque</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Reunión privada Mentor–Supervisor para alinear expectativas y criterios de éxito. Diagnóstico STARS y perfil de liderazgo del ejecutivo.</p></div></div>
+                <div class="timeline-item"><div class="timeline-num">2</div><div class="pt-0.5"><div class="mono" style="font-size:.62rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem">Semanas 3–4 · 2 horas</div><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">Equipo, jefe y victorias tempranas</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Construcción activa de la relación con el superior jerárquico. Evaluación del equipo heredado y selección de victorias tempranas.</p></div></div>
+                <div class="timeline-item"><div class="timeline-num">3</div><div class="pt-0.5"><div class="mono" style="font-size:.62rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem">Semanas 5–7 · 2 horas</div><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">Influencia, coaliciones y cultura</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Construcción de coaliciones con integridad. Lectura de la cultura no escrita de la organización.</p></div></div>
+                <div class="timeline-item"><div class="timeline-num">4</div><div class="pt-0.5"><div class="mono" style="font-size:.62rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem">Semanas 8–10 · 2 horas</div><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">Plan de 90 días y sostenibilidad</h4><p class="text-[#A9B6C8] text-base leading-relaxed">Consolidación de aprendizajes y compromisos de sostenibilidad. Plan de acción para los próximos 60–90 días.</p></div></div>
+            </div>
+        </div>
+        <div class="reveal mb-14">
+            <h3 class="text-[#F5F7FA] mb-8" style="font-size:1.6rem;font-weight:600">¿Para quién está diseñado?</h3>
+            <div class="grid md:grid-cols-2 gap-5">
+                <div class="feature-card"><i data-lucide="star" class="w-6 h-6 text-[#C9A25F] mb-3"></i><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">CEO / Director General</h4><p class="text-[#A9B6C8] text-base">Ingresa desde fuera o asciende internamente a la máxima posición ejecutiva.</p></div>
+                <div class="feature-card"><i data-lucide="briefcase" class="w-6 h-6 text-[#C9A25F] mb-3"></i><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">CFO / COO / CHRO / CTO</h4><p class="text-[#A9B6C8] text-base">Asume un rol C-Level en organización nueva o tras reestructuración profunda.</p></div>
+                <div class="feature-card"><i data-lucide="trending-up" class="w-6 h-6 text-[#C9A25F] mb-3"></i><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">VP / Director Senior</h4><p class="text-[#A9B6C8] text-base">Promovido a su primer rol de alta dirección con reporte directo al C-suite.</p></div>
+                <div class="feature-card"><i data-lucide="git-merge" class="w-6 h-6 text-[#C9A25F] mb-3"></i><h4 class="text-[#F5F7FA] font-semibold mb-1 text-lg">Ejecutivo M&amp;A</h4><p class="text-[#A9B6C8] text-base">Hereda equipos y culturas combinadas con expectativas de integración acelerada.</p></div>
+            </div>
+        </div>
+        <div class="reveal text-center"><button onclick="navigateTo('contacto')" class="gold-btn"><i data-lucide="calendar" class="w-4 h-4"></i><span>Solicitar información</span><i data-lucide="arrow-right" class="w-4 h-4"></i></button></div>
+    </div>
+</section>
+
+<!-- MENTORING VS COACHING -->
+<section id="diferencia-comparativo" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="text-center mb-14">
+            <h2 class="reveal text-[#F5F7FA] mb-4" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:600">Mentoring vs Coaching</h2>
+            <div class="gold-line center"></div>
+            <p class="reveal text-[#A9B6C8] max-w-xl mx-auto text-lg leading-relaxed mt-4">No estamos hablando de Coaching. La diferencia es la transferencia directa de experiencia ejecutiva real.</p>
+        </div>
+        <div class="reveal grid md:grid-cols-2 gap-6 mb-16">
+            <div class="feature-card" style="background:rgba(201,162,95,.04);border-color:rgba(201,162,95,.4)">
+                <div class="mono" style="font-size:.62rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem">Executive Mentoring &copy;</div>
+                <ul class="space-y-4">
+                    <li class="flex gap-3 items-start"><i data-lucide="check" class="w-4 h-4 text-[#C9A25F] mt-0.5 shrink-0"></i><div><span class="text-[#F5F7FA] text-sm font-medium block mb-0.5">Experiencia vivida</span><span class="text-[#A9B6C8] text-base">El Mentor habla desde sus propios roles C-Level. No hay teoría: hay criterio validado en la práctica.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="check" class="w-4 h-4 text-[#C9A25F] mt-0.5 shrink-0"></i><div><span class="text-[#F5F7FA] text-sm font-medium block mb-0.5">Consejo directo</span><span class="text-[#A9B6C8] text-base">El Mentor opina, recomienda y comparte soluciones probadas. No solo hace preguntas.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="check" class="w-4 h-4 text-[#C9A25F] mt-0.5 shrink-0"></i><div><span class="text-[#F5F7FA] text-sm font-medium block mb-0.5">Casos reales del Mentee</span><span class="text-[#A9B6C8] text-base">Cada sesión analiza una situación real y activa. No hay simulaciones ni ejercicios genéricos.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="check" class="w-4 h-4 text-[#C9A25F] mt-0.5 shrink-0"></i><div><span class="text-[#F5F7FA] text-sm font-medium block mb-0.5">Criterio transferible</span><span class="text-[#A9B6C8] text-base">El Mentee internaliza un enfoque más robusto y maduro para tomar decisiones de alto nivel.</span></div></li>
+                </ul>
+            </div>
+            <div class="feature-card" style="background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.06)">
+                <div class="mono" style="font-size:.62rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem">Coaching Convencional</div>
+                <ul class="space-y-4">
+                    <li class="flex gap-3 items-start"><i data-lucide="minus" class="w-4 h-4 text-[#4A5A72] mt-0.5 shrink-0"></i><div><span class="text-[#A9B6C8] text-sm font-medium block mb-0.5">Marco de preguntas</span><span class="text-[#4A5A72] text-base">El coach facilita la reflexión. No requiere haber ocupado el mismo tipo de rol.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="minus" class="w-4 h-4 text-[#4A5A72] mt-0.5 shrink-0"></i><div><span class="text-[#A9B6C8] text-sm font-medium block mb-0.5">Comportamientos y hábitos</span><span class="text-[#4A5A72] text-base">Mejora patrones conductuales sin transferencia de criterio ejecutivo.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="minus" class="w-4 h-4 text-[#4A5A72] mt-0.5 shrink-0"></i><div><span class="text-[#A9B6C8] text-sm font-medium block mb-0.5">Proceso estandarizado</span><span class="text-[#4A5A72] text-base">Metodología replicable aplicable a cualquier nivel, no específica para C-Level.</span></div></li>
+                    <li class="flex gap-3 items-start"><i data-lucide="minus" class="w-4 h-4 text-[#4A5A72] mt-0.5 shrink-0"></i><div><span class="text-[#A9B6C8] text-sm font-medium block mb-0.5">Neutralidad del facilitador</span><span class="text-[#4A5A72] text-base">El coach no toma partido. El coachee llega a sus propias conclusiones.</span></div></li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal p-8 border border-[#C9A25F]/25 text-center">
+            <p class="text-[#F5F7FA] italic" style="font-family:'Cormorant Garamond',serif;font-size:2.25rem !important;font-weight:500;line-height:1.3">"El Mentor es un referente, no un facilitador.<br>Habla desde lo vivido, no desde lo teórico."</p>
+        </div>
+    </div>
+</section>
+
+<!-- LOS MENTORES -->
+<section id="diferencia-mentor" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="text-center mb-14">
+            <h2 class="reveal text-[#F5F7FA] mb-4" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:600">Los Mentores</h2>
+            <div class="gold-line center"></div>
+            <p class="reveal text-[#A9B6C8] max-w-xl mx-auto text-base leading-relaxed mt-4">Ejecutivos que han estado donde usted está. No hablan desde la teoría: hablan desde décadas de decisiones reales en alta dirección.</p>
+        </div>
+        <!-- Armando -->
+        <div class="reveal feature-card mb-8 md:flex gap-10 items-start" style="border-color:rgba(201,162,95,.35)">
+            <div class="shrink-0 mb-6 md:mb-0"><img src="acg.jpg" alt="Armando Cavero" class="mentor-photo" style="width:7rem;height:8.5rem"></div>
+            <div>
+                <h3 class="text-[#F5F7FA] mb-1" style="font-size:1.6rem;font-weight:600">Armando Cavero</h3>
+                <span class="mono" style="font-size:.65rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1rem">Mentor Ejecutivo · Socio Top Search Perú</span>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-4">Ejecutivo con trayectoria internacional de más de 25 años como CEO y VP Regional en empresas Fortune 500, incluyendo <strong class="text-[#F5F7FA] font-medium">AT&amp;T, NCR, Compaq y Oracle</strong> en el Perú. Fue Vicepresidente para Latinoamérica de NCR Corporation y Director de Ventas para Latinoamérica Norte, con responsabilidad regional desde el World Headquarters en Dayton, Ohio.</p>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-4">Más de 25 años como fundador y director de <strong class="text-[#F5F7FA] font-medium">Top Search Perú</strong>, con más de 400 búsquedas realizadas a nivel C-Level. Ha sido asesor ministerial y director miembro del Comité Ejecutivo de IPAE.</p>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-5">Bachiller en Ciencias Sociales — Economía (PUCP). Estudios de posgrado en PAD Universidad de Piura, ESAN y AT&amp;T/NCR Management Schools.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">CEO Fortune 500</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">VP LATAM · NCR</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">+400 búsquedas C-Level</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">AT&amp;T · Compaq · Oracle</span>
+                </div>
+            </div>
+        </div>
+        <!-- Guillermo -->
+        <div class="reveal feature-card mb-14 md:flex gap-10 items-start" style="border-color:rgba(201,162,95,.35)">
+            <div class="shrink-0 mb-6 md:mb-0"><img src="gvof.jpg" alt="Guillermo van Oordt F." class="mentor-photo" style="width:7rem;height:8.5rem"></div>
+            <div>
+                <h3 class="text-[#F5F7FA] mb-1" style="font-size:1.6rem;font-weight:600">Guillermo van Oordt F.</h3>
+                <span class="mono" style="font-size:.65rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:1rem">Mentor Ejecutivo · Socio Top Search Perú</span>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-4">Director ejecutivo, CEO y VP en organizaciones locales, regionales y globales en banca, seguros, consultoría y servicios financieros, incluyendo <strong class="text-[#F5F7FA] font-medium">Interbank, Citibank, BTG Pactual, Pacífico Seguros y EY</strong>. Fue Director Ejecutivo de Gobierno Corporativo y Sostenibilidad en EY Perú y CEO de Macro Wealth Management del Grupo Macroconsult.</p>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-4">Más de ocho años de experiencia en Executive Search especializado en Directores, VPs y C-Levels. Liderazgo comprobado en B2B, B2C y B2G, planificación y sucesión, y gestión de negocios a nivel regional y global.</p>
+                <p class="text-[#A9B6C8] text-base leading-relaxed mb-5">MBA en Negocios Internacionales por la <strong class="text-[#F5F7FA] font-medium">Universidad ESAN</strong>. Bachiller en Administración por Johnson &amp; Wales University (Providence, Rhode Island). Director en IPAE y múltiples Advisory Boards.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">CEO · Banca y Finanzas</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">EY · BTG Pactual · Citibank</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">Gobierno Corporativo</span>
+                    <span class="px-3 py-1 text-xs border border-[#C9A25F]/25 text-[#A9B6C8]">MBA ESAN</span>
+                </div>
+            </div>
+        </div>
+        <div class="reveal p-6 border border-[#C9A25F]/20 text-center">
+            <p class="text-[#A9B6C8] text-base">Cada programa es conducido por uno de los dos mentores, asignado según el perfil del ejecutivo, el sector y las necesidades específicas del proceso.</p>
+            <p class="text-[#A9B6C8] text-sm mt-2 italic">Top Search Perú · Miembros de InterSearch Worldwide</p>
+        </div>
+    </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="text-center mb-14">
+            <h2 class="reveal text-[#F5F7FA] mb-4" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:600">Resultados Esperados</h2>
+            <div class="gold-line center"></div>
+            <p class="reveal text-[#A9B6C8] max-w-xl mx-auto text-base leading-relaxed mt-4">Aplicables a ambos programas — Executive Mentoring&copy; y Soft Landing&copy;.</p>
+        </div>
+        <div class="reveal grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+            <div class="feature-card"><i data-lucide="target" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h3 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Transiciones Exitosas</h3><p class="text-[#A9B6C8] text-base">Aterrizaje más rápido y seguro en roles C-Level, con menor riesgo de fracaso.</p></div>
+            <div class="feature-card"><i data-lucide="brain" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h3 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Madurez Ejecutiva</h3><p class="text-[#A9B6C8] text-base">Decisiones más alineadas con la estrategia y las expectativas reales.</p></div>
+            <div class="feature-card"><i data-lucide="users" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h3 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Retención del Talento</h3><p class="text-[#A9B6C8] text-base">Menor rotación del talento crítico y mayor compromiso organizacional.</p></div>
+            <div class="feature-card"><i data-lucide="trending-up" class="w-7 h-7 text-[#C9A25F] mb-4"></i><h3 class="text-[#F5F7FA] font-semibold mb-2 text-lg">Pipeline Sólido</h3><p class="text-[#A9B6C8] text-base">Sucesiones planificadas y fortalecimiento continuo del liderazgo.</p></div>
+        </div>
+        <div class="reveal grid md:grid-cols-3 gap-6 p-8 bg-[#ffffff04] border border-[#C9A25F]/10">
+            <div class="text-center"><div class="text-[#C9A25F] mb-1" style="font-size:2.5rem;font-weight:700;font-family:'Cormorant Garamond',serif">94%</div><div class="text-[#F5F7FA] text-sm font-medium mb-1">Retención de talento</div><div class="text-[#A9B6C8] text-sm italic">Fuente: Gartner</div></div>
+            <div class="text-center" style="border-left:1px solid rgba(201,162,95,.15);border-right:1px solid rgba(201,162,95,.15)"><div class="text-[#C9A25F] mb-1" style="font-size:2.5rem;font-weight:700;font-family:'Cormorant Garamond',serif">60%</div><div class="text-[#F5F7FA] text-sm font-medium mb-1">Más promociones internas</div><div class="text-[#A9B6C8] text-sm italic">Fuente: Gartner</div></div>
+            <div class="text-center"><div class="text-[#C9A25F] mb-1" style="font-size:2.5rem;font-weight:700;font-family:'Cormorant Garamond',serif">25%</div><div class="text-[#F5F7FA] text-sm font-medium mb-1">Aumento de productividad</div><div class="text-[#A9B6C8] text-sm italic">Fuente: HBR</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="page-section">
+    <div class="px-[9vw] py-16 max-w-5xl mx-auto">
+        <button onclick="navigateTo('home')" class="back-link"><i data-lucide="arrow-left" class="w-4 h-4"></i> Inicio</button>
+        <div class="text-center mb-14">
+            <h2 class="reveal text-[#F5F7FA] mb-4" style="font-size:clamp(2rem,5vw,3.5rem);font-weight:600">Conversemos</h2>
+            <div class="gold-line center"></div>
+            <p class="reveal text-[#A9B6C8] text-lg max-w-xl mx-auto leading-relaxed mt-4">Si está formando a su siguiente generación de líderes, o necesita reducir el riesgo de una transición ejecutiva crítica, el primer paso es una conversación confidencial.</p>
+        </div>
+        <div class="reveal grid md:grid-cols-2 gap-6 mb-12" style="max-width:900px;margin-left:auto;margin-right:auto;">
+            <div class="feature-card" style="border-color:rgba(201,162,95,.35)">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="acg.jpg" alt="Armando Cavero" class="contact-photo">
+                    <div><h3 class="text-[#F5F7FA] font-semibold text-lg">Armando Cavero</h3><span class="mono" style="font-size:.6rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Mentor Ejecutivo · Socio</span></div>
+                </div>
+                <div class="space-y-3">
+                    <a href="/cdn-cgi/l/email-protection#8cedfee1ede2e8e3ccf8e3fcffe9edfeefe4a2fce9" class="flex items-center gap-3 text-[#A9B6C8] hover:text-[#C9A25F] transition-colors text-base"><i data-lucide="mail" class="w-4 h-4"></i> <span class="__cf_email__" data-cfemail="55342738343b313a15213a2526303427363d7b2530">[email&#160;protected]</span></a>
+                    <a href="https://linkedin.com/in/armandocavero" target="_blank" rel="noopener" class="flex items-center gap-3 text-[#A9B6C8] hover:text-[#C9A25F] transition-colors text-base"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a>
+                </div>
+            </div>
+            <div class="feature-card" style="border-color:rgba(201,162,95,.35)">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="gvof.jpg" alt="Guillermo van Oordt F." class="contact-photo">
+                    <div><h3 class="text-[#F5F7FA] font-semibold text-lg">Guillermo van Oordt F.</h3><span class="mono" style="font-size:.6rem;letter-spacing:.14em;color:var(--gold);text-transform:uppercase">Mentor Ejecutivo · Socio</span></div>
+                </div>
+                <div class="space-y-3">
+                    <a href="/cdn-cgi/l/email-protection#f790829e9b9b92859a98b783988784929685949fd98792" class="flex items-center gap-3 text-[#A9B6C8] hover:text-[#C9A25F] transition-colors text-base"><i data-lucide="mail" class="w-4 h-4"></i> <span class="__cf_email__" data-cfemail="f19684989d9d94839c9eb1859e81829490839299df8194">[email&#160;protected]</span></a>
+                    <a href="https://linkedin.com/in/guillermovanoordt" target="_blank" rel="noopener" class="flex items-center gap-3 text-[#A9B6C8] hover:text-[#C9A25F] transition-colors text-base"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="reveal text-center">
+            <a href="/cdn-cgi/l/email-protection#3b5a49565a555f547b4f544b485e5a495853154b5e045858065c4e5257575e4956547b4f544b485e5a495853154b5e1d484e59515e584f06785455484e574f5a1e090b7e435e584e4f524d5e1e090b7f5e4d5e57544b565e554f" class="gold-btn">
+                <i data-lucide="calendar" class="w-4 h-4"></i><span>Agendar una conversación</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" style="justify-content:center;">
+    <p style="font-size:.85rem;color:#F5F7FA;text-align:center;">Una unidad de negocio de Top Search Perú · © 2026</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Splash: hide after CSS animation ends
+    document.getElementById('splash').addEventListener('animationend', function() {
+        this.style.display = 'none';
+    });
+
+    // Icons
+    lucide.createIcons();
+
+    // Navigation
+    function navigateTo(id) {
+        document.querySelectorAll('.page-section').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        var target = document.getElementById(id);
+        if (target) {
+            target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        document.querySelectorAll('.nav-link').forEach(function(l) {
+            l.classList.remove('active');
+        });
+        if (id === 'home') document.getElementById('link-home').classList.add('active');
+        if (id === 'em-overview' || id === 'sl-overview') document.getElementById('link-servicios').classList.add('active');
+        if (id.indexOf('diferencia') === 0) document.getElementById('link-diferencia').classList.add('active');
+        if (id === 'resultados') document.getElementById('link-resultados').classList.add('active');
+        if (id === 'contacto') document.getElementById('link-contacto').classList.add('active');
+    }
+
+    // Mobile menu
+    function toggleMobileMenu() {
+        var menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
+        }
+    }
+</script><script>
+    // Hide splash after CSS animation ends
+    document.getElementById('splash').addEventListener('animationend', function() {
+        this.style.display = 'none';
+    });
+
+    lucide.createIcons();
+    function navigateTo(id){
+        document.querySelectorAll('.page-section').forEach(el=>el.classList.remove('active'));
+        const t=document.getElementById(id);
+        if(t){t.classList.add('active');window.scrollTo(0,0);}
+        document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+        if(id==='home')document.getElementById('link-home').classList.add('active');
+        if(id==='em-overview'||id==='sl-overview')document.getElementById('link-servicios').classList.add('active');
+        if(id.startsWith('diferencia'))document.getElementById('link-diferencia').classList.add('active');
+        if(id==='resultados')document.getElementById('link-resultados').classList.add('active');
+        if(id==='contacto')document.getElementById('link-contacto').classList.add('active');
+        setTimeout(()=>document.querySelectorAll('.page-section.active .reveal').forEach(el=>el.cla
