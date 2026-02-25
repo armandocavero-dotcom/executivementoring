@@ -56,18 +56,15 @@
         .contact-photo{width:3rem;height:3rem;object-fit:cover;object-position:center top;border-radius:2px}
         .mono{font-family:'DM Mono',monospace}
 
-        /* SPLASH - pure CSS animation, no JS needed */
+        /* SPLASH - stays fixed until user clicks INGRESAR */
         #splash {
             position:fixed; inset:0; z-index:9999;
             background:#0B1B3B;
-            display:flex; align-items:center; justify-content:center;
-            animation: splashFade 8.2s ease forwards;
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
         }
-        @keyframes splashFade {
-            0%   { opacity:1; pointer-events:all; }
-            70%  { opacity:1; pointer-events:all; }
-            95%  { opacity:0; pointer-events:none; }
-            100% { opacity:0; pointer-events:none; display:none; }
+        #splash.hide {
+            transform: translateY(-100%);
         }
         #splash img {
             width: min(500px, 78vw);
@@ -77,6 +74,77 @@
         @keyframes splashPop {
             from { opacity:0; transform:scale(.82); }
             to   { opacity:1; transform:scale(1); }
+        }
+        /* Botón INGRESAR */
+        #btn-ingresar {
+            margin-top: 3rem;
+            padding: 1.2rem 3.5rem;
+            background: linear-gradient(180deg, var(--gold) 0%, #b8944d 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: var(--navy);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: btnPulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 16px rgba(201, 162, 95, 0.4),
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+        }
+        #btn-ingresar::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #e0c580 0%, var(--gold) 100%);
+            transform: translateY(-102%);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+        #btn-ingresar:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 
+                0 12px 24px rgba(201, 162, 95, 0.5),
+                0 6px 12px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+        }
+        #btn-ingresar:hover::before {
+            transform: translateY(0);
+        }
+        #btn-ingresar:active {
+            transform: translateY(1px) scale(1.02);
+            box-shadow: 
+                0 4px 8px rgba(201, 162, 95, 0.3),
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                inset 0 2px 6px rgba(0, 0, 0, 0.3),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.2);
+        }
+        @keyframes btnPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 8px 16px rgba(201, 162, 95, 0.4),
+                    0 4px 8px rgba(0, 0, 0, 0.3),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+                    0 0 0 0 rgba(201, 162, 95, 0.4);
+            }
+            50% { 
+                box-shadow: 
+                    0 8px 16px rgba(201, 162, 95, 0.4),
+                    0 4px 8px rgba(0, 0, 0, 0.3),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+                    0 0 0 15px rgba(201, 162, 95, 0);
+            }
         }
 
         /* GLOBAL FONT SIZE BOOST - all body content at least 1rem */
@@ -94,7 +162,10 @@
 </head>
 <body>
 
-<div id="splash"><img src="logo.jpg" alt="Executive Mentoring"></div>
+<div id="splash">
+    <img src="logo.jpg" alt="Executive Mentoring">
+    <button id="btn-ingresar" onclick="ingresarSitio()">INGRESAR</button>
+</div>
 
 <nav class="nav-fixed">
     <div onclick="navigateTo('home')" style="cursor:pointer;display:flex;align-items:center;gap:.75rem">
@@ -543,10 +614,14 @@
 </style>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Splash: hide after CSS animation ends
-    document.getElementById('splash').addEventListener('animationend', function() {
-        this.style.display = 'none';
-    });
+    // Función para ingresar al sitio
+    function ingresarSitio() {
+        const splash = document.getElementById('splash');
+        splash.classList.add('hide');
+        setTimeout(function() {
+            splash.style.display = 'none';
+        }, 800);
+    }
 
     // Icons
     lucide.createIcons();
@@ -581,11 +656,6 @@
         }
     }
 </script><script>
-    // Hide splash after CSS animation ends
-    document.getElementById('splash').addEventListener('animationend', function() {
-        this.style.display = 'none';
-    });
-
     lucide.createIcons();
     function navigateTo(id){
         document.querySelectorAll('.page-section').forEach(el=>el.classList.remove('active'));
