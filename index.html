@@ -497,6 +497,51 @@
     <p style="font-size:.85rem;color:#F5F7FA;text-align:center;">Una unidad de negocio de <a href="https://www.topsearch.pe" target="_blank" rel="noopener" style="color:#C9A25F;text-decoration:none">Top Search Perú</a> · © 2026</p>
 </footer>
 
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/51934912540?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20de%20los%20programas%20de%20Desarrollo%20Ejecutivo%20de%20Top%20Search%20Peru"
+   target="_blank" rel="noopener"
+   id="wa-btn"
+   title="Escríbenos por WhatsApp"
+   style="
+     position: fixed;
+     bottom: 28px;
+     right: 28px;
+     z-index: 9998;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     background: #25D366;
+     color: #fff;
+     text-decoration: none;
+     padding: 13px 20px 13px 16px;
+     border-radius: 50px;
+     box-shadow: 0 6px 28px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.25);
+     font-family: 'DM Sans', sans-serif;
+     font-size: .9rem;
+     font-weight: 600;
+     letter-spacing: .01em;
+     transition: transform .2s ease, box-shadow .2s ease;
+     animation: waPulse 2.6s ease-in-out infinite;
+   "
+   onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 10px 36px rgba(37,211,102,0.55), 0 2px 8px rgba(0,0,0,0.3)'"
+   onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.25)'"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="26" height="26" fill="#fff" style="flex-shrink:0">
+    <path d="M16.004 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.365.629 4.681 1.822 6.706L2.667 29.333l6.8-1.786A13.28 13.28 0 0 0 16.004 29.333C23.36 29.333 29.333 23.36 29.333 16S23.36 2.667 16.004 2.667zm0 24.267a11 11 0 0 1-5.61-1.538l-.402-.24-4.035 1.059 1.078-3.926-.262-.416A11.004 11.004 0 1 1 16.004 26.934zm6.04-8.24c-.33-.165-1.953-.963-2.256-1.073-.304-.11-.525-.165-.745.165-.22.33-.853 1.073-1.046 1.293-.192.22-.385.247-.715.082-.33-.165-1.394-.514-2.656-1.638-.982-.875-1.645-1.956-1.838-2.286-.192-.33-.021-.508.145-.672.15-.148.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.027-.578-.083-.165-.745-1.797-1.02-2.46-.27-.647-.543-.56-.745-.57l-.634-.011a1.22 1.22 0 0 0-.88.413c-.303.33-1.155 1.128-1.155 2.75s1.182 3.19 1.347 3.41c.165.22 2.326 3.553 5.637 4.982.788.34 1.402.543 1.881.695.79.25 1.51.215 2.078.13.634-.094 1.953-.798 2.228-1.57.275-.77.275-1.43.192-1.57-.082-.137-.303-.22-.633-.385z"/>
+  </svg>
+  <span style="white-space:nowrap">¿Hablamos?</span>
+</a>
+<style>
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 6px 28px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.25); }
+    50%       { box-shadow: 0 6px 36px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+  }
+  @media (max-width: 480px) {
+    #wa-btn span { display: none; }
+    #wa-btn { padding: 14px; border-radius: 50%; }
+  }
+</style>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Splash: hide after CSS animation ends
     document.getElementById('splash').addEventListener('animationend', function() {
