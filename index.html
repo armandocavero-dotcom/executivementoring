@@ -160,7 +160,15 @@
         .stars-badge, .back-link { font-size: inherit !important; line-height: inherit !important; }
 
         /* ===== RESPONSIVE MOBILE ===== */
+        .body-no-scroll { overflow: hidden !important; }
+
         @media (max-width: 767px) {
+            /* Nav bar */
+            .nav-fixed { padding: 0 4vw; }
+            .nav-fixed img { height: 2.2rem !important; }
+            .brand-name { font-size: .95rem; }
+            .brand-sub { font-size: .5rem; letter-spacing: .12em; }
+
             /* General spacing */
             .px-\[9vw\] { padding-left: 5vw !important; padding-right: 5vw !important; }
             .px-\[6vw\] { padding-left: 5vw !important; padding-right: 5vw !important; }
@@ -200,6 +208,13 @@
 
             /* WhatsApp button position */
             #wa-btn { bottom: 16px; right: 16px; }
+
+            /* Splash screen */
+            #splash img { width: min(320px, 70vw); }
+            #btn-ingresar { padding: .9rem 2.5rem; font-size: .95rem; }
+
+            /* Hero logo */
+            #home img[alt="Executive Mentoring"] { height: 5rem !important; }
 
             /* Section titles */
             h2 { font-size: clamp(1.8rem, 7vw, 2.8rem) !important; }
@@ -258,21 +273,22 @@
         <div class="nav-item"><button onclick="navigateTo('resultados')" class="nav-link" id="link-resultados">Resultados</button></div>
         <div class="nav-item"><button onclick="navigateTo('contacto')" class="nav-link" id="link-contacto" style="color:var(--gold)">Contacto</button></div>
     </div>
-    <button class="md:hidden text-[#F5F7FA]" onclick="toggleMobileMenu()"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    <button class="md:hidden text-[#F5F7FA]" id="mobile-menu-btn" onclick="toggleMobileMenu()" style="padding:8px;z-index:201"><i data-lucide="menu" class="w-6 h-6"></i></button>
 </nav>
 
-<div id="mobile-menu" class="fixed top-[72px] left-0 w-full bg-[#0B1B3B]/97 border-t border-[#C9A25F]/15 h-[calc(100vh-72px)] overflow-y-auto hidden z-50">
-    <div class="flex flex-col p-6 gap-5">
-        <button onclick="navigateTo('home');toggleMobileMenu()" class="text-left text-base text-[#F5F7FA] font-medium uppercase tracking-wider">Inicio</button>
-        <div class="mono text-xs text-[#C9A25F] uppercase tracking-[.18em] font-semibold mt-2">Servicios</div>
-        <button onclick="navigateTo('em-overview');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Executive Mentoring &copy;</button>
-        <button onclick="navigateTo('sl-overview');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Soft Landing &copy;</button>
-        <button onclick="navigateTo('self-landing');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Self Landing &copy;</button>
-        <div class="mono text-xs text-[#C9A25F] uppercase tracking-[.18em] font-semibold mt-2">Nuestra Diferencia</div>
-        <button onclick="navigateTo('diferencia-comparativo');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Mentoring vs Coaching</button>
-        <button onclick="navigateTo('diferencia-mentor');toggleMobileMenu()" class="text-left pl-4 text-[#A9B6C8]">Los Mentores</button>
-        <button onclick="navigateTo('resultados');toggleMobileMenu()" class="text-left text-base text-[#F5F7FA] font-medium uppercase tracking-wider">Resultados</button>
-        <button onclick="navigateTo('contacto');toggleMobileMenu()" class="text-left text-base text-[#C9A25F] font-medium uppercase tracking-wider">Contacto</button>
+<div id="mobile-menu" style="display:none;position:fixed;top:72px;left:0;width:100%;height:calc(100vh - 72px);background:#0B1B3B;z-index:190;overflow-y:auto;border-top:1px solid rgba(201,162,95,.15);">
+    <div style="display:flex;flex-direction:column;padding:1.5rem;gap:1.2rem;">
+        <button onclick="navigateTo('home');toggleMobileMenu()" style="text-align:left;font-size:1rem;color:#F5F7FA;font-weight:500;text-transform:uppercase;letter-spacing:.08em;background:none;border:none;font-family:'DM Sans',sans-serif;padding:.5rem 0;cursor:pointer">Inicio</button>
+        <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C9A25F;text-transform:uppercase;letter-spacing:.18em;font-weight:600;padding-top:.5rem;border-top:1px solid rgba(201,162,95,.12)">Servicios</div>
+        <button onclick="navigateTo('em-overview');toggleMobileMenu()" style="text-align:left;padding-left:1rem;color:#A9B6C8;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.95rem;cursor:pointer">Executive Mentoring &copy;</button>
+        <button onclick="navigateTo('sl-overview');toggleMobileMenu()" style="text-align:left;padding-left:1rem;color:#A9B6C8;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.95rem;cursor:pointer">Soft Landing &copy;</button>
+        <button onclick="navigateTo('self-landing');toggleMobileMenu()" style="text-align:left;padding-left:1rem;color:#A9B6C8;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.95rem;cursor:pointer">Self Landing &copy;</button>
+        <div style="font-family:'DM Mono',monospace;font-size:.7rem;color:#C9A25F;text-transform:uppercase;letter-spacing:.18em;font-weight:600;padding-top:.5rem;border-top:1px solid rgba(201,162,95,.12)">Nuestra Diferencia</div>
+        <button onclick="navigateTo('diferencia-comparativo');toggleMobileMenu()" style="text-align:left;padding-left:1rem;color:#A9B6C8;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.95rem;cursor:pointer">Mentoring vs Coaching</button>
+        <button onclick="navigateTo('diferencia-mentor');toggleMobileMenu()" style="text-align:left;padding-left:1rem;color:#A9B6C8;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.95rem;cursor:pointer">Los Mentores</button>
+        <div style="border-top:1px solid rgba(201,162,95,.12);padding-top:.5rem"></div>
+        <button onclick="navigateTo('resultados');toggleMobileMenu()" style="text-align:left;font-size:1rem;color:#F5F7FA;font-weight:500;text-transform:uppercase;letter-spacing:.08em;background:none;border:none;font-family:'DM Sans',sans-serif;padding:.5rem 0;cursor:pointer">Resultados</button>
+        <button onclick="navigateTo('contacto');toggleMobileMenu()" style="text-align:left;font-size:1rem;color:#C9A25F;font-weight:500;text-transform:uppercase;letter-spacing:.08em;background:none;border:none;font-family:'DM Sans',sans-serif;padding:.5rem 0;cursor:pointer">Contacto</button>
     </div>
 </div>
 
@@ -777,9 +793,21 @@
     }
 
     // Mobile menu toggle
+    var mobileMenuOpen = false;
     function toggleMobileMenu() {
         var menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
+        var btn = document.getElementById('mobile-menu-btn');
+        mobileMenuOpen = !mobileMenuOpen;
+        if (mobileMenuOpen) {
+            menu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            btn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+        } else {
+            menu.style.display = 'none';
+            document.body.style.overflow = '';
+            btn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        }
+        lucide.createIcons();
     }
 </script>
 </body>
